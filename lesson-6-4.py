@@ -1,12 +1,14 @@
-def parse_input(user_input):
+from typing import List, Dict, Tuple
+
+def parse_input(user_input: str) -> Tuple[str, List[str]]:
     """Розбирає введений рядок на команду та аргументи."""
     if not user_input.strip():
         return "", []
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
-    return cmd, *args
+    return cmd, args
 
-def add_contact(args, contacts):
+def add_contact(args: List[str], contacts: Dict[str, str]) -> str:
     """Додає новий контакт або оновлює існуючий."""
     if len(args) < 2:
         return "Error: Give me name and phone please."
@@ -14,7 +16,7 @@ def add_contact(args, contacts):
     contacts[name] = phone
     return "Contact added."
 
-def change_contact(args, contacts):
+def change_contact(args: List[str], contacts: Dict[str, str]) -> str:
     """Змінює номер телефону для існуючого контакту."""
     if len(args) < 2:
         return "Error: Give me name and phone please."
@@ -22,57 +24,43 @@ def change_contact(args, contacts):
     if name in contacts:
         contacts[name] = phone
         return "Contact updated."
-    else:
-        return f"Error: Contact '{name}' not found."
+    return f"Error: Contact '{name}' not found."
 
-def show_phone(args, contacts):
+def show_phone(args: List[str], contacts: Dict[str, str]) -> str:
     """Виводить номер телефону за ім'ям."""
     if not args:
         return "Error: Enter user name."
     name = args[0]
-    if name in contacts:
-        return contacts[name]
-    else:
-        return f"Error: Contact '{name}' not found."
+    return contacts.get(name, f"Error: Contact '{name}' not found.")
 
-def show_all(contacts):
+def show_all(contacts: Dict[str, str]) -> str:
     """Виводить всі збережені контакти."""
     if not contacts:
         return "No contacts saved."
-    
-    result = []
-    for name, phone in contacts.items():
-        result.append(f"{name}: {phone}")
-    return "\n".join(result)
+    return "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
 
-def main():
+def main() -> None:
     """Основний цикл управління ботом."""
-    contacts = {}
+    contacts: Dict[str, str] = {}
     print("Welcome to the assistant bot!")
     
     while True:
         user_input = input("Enter a command: ")
-        command, *args = parse_input(user_input)
+        command, args = parse_input(user_input)
 
         if command in ["close", "exit"]:
             print("Good bye!")
             break
-
         elif command == "hello":
             print("How can I help you?")
-
         elif command == "add":
             print(add_contact(args, contacts))
-
         elif command == "change":
             print(change_contact(args, contacts))
-
         elif command == "phone":
             print(show_phone(args, contacts))
-
         elif command == "all":
             print(show_all(contacts))
-
         else:
             print("Invalid command.")
 
