@@ -1,5 +1,6 @@
 from typing import Tuple
 
+
 def total_salary(path: str) -> Tuple[float, float]:
     """
     Аналізує файл із зарплатами та обчислює загальну та середню суму.
@@ -36,6 +37,7 @@ def total_salary(path: str) -> Tuple[float, float]:
         print(f"Сталася непередбачена помилка: {e}")
         return 0.0, 0.0
 
+#Тут також має бути відстань у два рядки?
 if __name__ == "__main__":
     # Тестові дані: створення файлу та виклик функції
     test_filename = "salary_file.txt"
