@@ -1,5 +1,6 @@
 from typing import List, Dict
 
+
 def get_cats_info(path: str) -> List[Dict[str, str]]:
     """
     Читає файл із даними про котів і перетворює їх на список словників.
@@ -32,6 +33,7 @@ def get_cats_info(path: str) -> List[Dict[str, str]]:
     except Exception as e:
         print(f"Сталася непередбачена помилка: {e}")
         return []
+
 
 if __name__ == "__main__":
     test_filename = "cats_file.txt"
