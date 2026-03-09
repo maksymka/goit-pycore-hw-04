@@ -1,5 +1,6 @@
 from typing import List, Dict, Tuple
 
+
 def parse_input(user_input: str) -> Tuple[str, List[str]]:
     """Розбирає введений рядок на команду та аргументи."""
     if not user_input.strip():
@@ -8,6 +9,7 @@ def parse_input(user_input: str) -> Tuple[str, List[str]]:
     cmd = cmd.strip().lower()
     return cmd, args
 
+
 def add_contact(args: List[str], contacts: Dict[str, str]) -> str:
     """Додає новий контакт або оновлює існуючий."""
     if len(args) < 2:
@@ -15,6 +17,7 @@ def add_contact(args: List[str], contacts: Dict[str, str]) -> str:
     name, phone = args
     contacts[name] = phone
     return "Contact added."
+
 
 def change_contact(args: List[str], contacts: Dict[str, str]) -> str:
     """Змінює номер телефону для існуючого контакту."""
@@ -26,6 +29,7 @@ def change_contact(args: List[str], contacts: Dict[str, str]) -> str:
         return "Contact updated."
     return f"Error: Contact '{name}' not found."
 
+
 def show_phone(args: List[str], contacts: Dict[str, str]) -> str:
     """Виводить номер телефону за ім'ям."""
     if not args:
@@ -33,11 +37,13 @@ def show_phone(args: List[str], contacts: Dict[str, str]) -> str:
     name = args[0]
     return contacts.get(name, f"Error: Contact '{name}' not found.")
 
+
 def show_all(contacts: Dict[str, str]) -> str:
     """Виводить всі збережені контакти."""
     if not contacts:
         return "No contacts saved."
     return "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
+
 
 def main() -> None:
     """Основний цикл управління ботом."""
@@ -63,6 +69,7 @@ def main() -> None:
             print(show_all(contacts))
         else:
             print("Invalid command.")
+
 
 if __name__ == "__main__":
     main()
