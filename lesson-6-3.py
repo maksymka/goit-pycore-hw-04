@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Union
 from colorama import Fore, Style, init
 
+
 # Ініціалізація colorama
 init(autoreset=True)
 
@@ -31,6 +32,7 @@ def visualize_directory_structure(path: Union[str, Path], indent: str = "") -> N
     except PermissionError:
         print(f"{indent}{Fore.RED}[Доступ заборонено]{Style.RESET_ALL}")
 
+
 def main() -> None:
     if len(sys.argv) < 2:
         print(f"{Fore.YELLOW}Використання: python hw03.py <шлях_до_директорії>{Style.RESET_ALL}")
@@ -44,6 +46,7 @@ def main() -> None:
 
     print(f"{Fore.CYAN}📦 {target_path.name}{Style.RESET_ALL}")
     visualize_directory_structure(target_path)
+
 
 if __name__ == "__main__":
     main()
